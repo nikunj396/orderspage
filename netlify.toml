@@ -1,0 +1,67 @@
+# Netlify Configuration for Breakfastclub Orders Portal
+
+[build]
+  # Build command - installs dependencies
+  command = "npm install"
+  
+  # Output directory (root for static files)
+  directory = "/"
+  
+  # Node version
+  node_version = "18.17.0"
+
+# Redirects for Single Page Application
+[[redirects]]
+  from = "/*"
+  to = "/orders.html"
+  status = 200
+
+# Function configuration
+[functions]
+  # Node.js runtime
+  node_bundler = "esbuild"
+  
+  # Function configurations
+  directory = "api"
+
+# Build environment variables
+[build.environment]
+  NODE_ENV = "production"
+
+# HTTP Headers for security & caching
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[headers]]
+  for = "orders.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+    Content-Type = "text/html; charset=utf-8"
+
+[[headers]]
+  for = "/api/*"
+  [headers.values]
+    Cache-Control = "no-cache, no-store, must-revalidate"
+
+# Plugins (optional)
+[plugins]
+  package = "@netlify/plugin-functions-core"
+
+# Deploy contexts
+[context.production]
+  command = "npm install"
+  environment = { NODE_ENV = "production" }
+
+[context.deploy-preview]
+  command = "npm install"
+  environment = { NODE_ENV = "development" }
+
+[context.branch-deploy]
+  command = "npm install"
+  environment = { NODE_ENV = "development" }
