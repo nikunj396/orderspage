@@ -1,0 +1,28 @@
+{
+  "name": "breakfastclub-orders",
+  "version": "1.0.0",
+  "description": "Breakfastclub Orders Portal - Vercel Backend",
+  "main": "orders.html",
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "npm install",
+    "deploy": "vercel --prod",
+    "serve": "npx serve ."
+  },
+  "keywords": [
+    "orders",
+    "portal",
+    "vercel",
+    "serverless"
+  ],
+  "author": "Breakfastclub",
+  "license": "MIT",
+  "dependencies": {
+    "@supabase/supabase-js": "^2.38.0",
+    "axios": "^1.6.0",
+    "crypto": "^1.0.1"
+  },
+  "devDependencies": {
+    "vercel": "^32.0.0"
+  }
+}
